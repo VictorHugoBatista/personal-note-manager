@@ -34,17 +34,23 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Note create(Note note) {
-        return note;
+        return repository.insert(note);
     }
 
     @Override
     public Note update(Note note) {
-        return note;
+        var noteFromDatabase = detail(note.getId());
+        var nodeUpdated = noteFromDatabase
+            .setTitle(note.getTitle())
+            .setContent(note.getContent());
+
+        return repository.save(nodeUpdated);
     }
 
     @Override
     public Note delete(String id) {
-        return new Note()
-            .setId(id);
+        var note = detail(id);
+        repository.deleteById(id);
+        return note;
     }
 }

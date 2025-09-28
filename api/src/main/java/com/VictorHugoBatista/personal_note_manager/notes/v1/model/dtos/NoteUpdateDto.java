@@ -24,9 +24,11 @@ public class NoteUpdateDto {
     }
 
     public Note toNote(String id) {
-        return new Note()
+        Note note = new Note()
             .setId(id)
             .setTitle(title)
             .setContent(content);
+
+        return note;
     }
 }

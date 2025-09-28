@@ -1,5 +1,6 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.model;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -35,19 +36,31 @@ public class Note {
     }
 
     public Note setTitle(String title) {
+        if (title == null) {
+            return this;
+        }
+
         this.title = title;
 
         return this;
     }
 
     public Note setContent(String content) {
+        if (content == null) {
+            return this;
+        }
+
         this.content = content;
 
-        return this;
+        return setPreview(content);
     }
 
-    public Note setPreview(String preview) {
-        this.preview = preview;
+    private Note setPreview(String content) {
+        if (content == null) {
+            return this;
+        }
+
+        this.preview = StringUtils.substring(content, 0, 100);
 
         return this;
     }
