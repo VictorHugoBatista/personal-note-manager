@@ -21,6 +21,6 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Note delete(UUID id) {
-        return new Note(id, "a", "b");
+        return new Note(id, "a", "b", "preview");
     }
 }
