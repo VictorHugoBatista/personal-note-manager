@@ -1,2 +1,2 @@
-infra/data/*
-!infra/data/.gitkeep
+infra/mongodb_data/*
+!infra/mongodb_data/.gitkeep
