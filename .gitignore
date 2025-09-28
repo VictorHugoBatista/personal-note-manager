@@ -1,2 +1,2 @@
-infra/mongodb_data/*
-!infra/mongodb_data/.gitkeep
+.vscode
+
