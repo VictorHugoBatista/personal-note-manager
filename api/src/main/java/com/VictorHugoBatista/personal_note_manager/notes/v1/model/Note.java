@@ -3,9 +3,12 @@ package com.VictorHugoBatista.personal_note_manager.notes.v1.model;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.annotation.Id;
 
 public class Note {
+    @Id
     private UUID id;
+
     private String title;
     private String content;
     private String preview;
