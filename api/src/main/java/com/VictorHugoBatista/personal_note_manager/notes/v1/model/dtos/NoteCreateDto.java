@@ -26,6 +26,8 @@ public class NoteCreateDto {
     }
 
     public Note toNote() {
-        return new Note(title, content);
+        return new Note()
+            .setTitle(title)
+            .setContent(content);
     }
 }

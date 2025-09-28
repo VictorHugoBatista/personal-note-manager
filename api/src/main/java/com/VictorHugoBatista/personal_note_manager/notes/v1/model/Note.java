@@ -1,40 +1,18 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.model;
 
-import java.util.UUID;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("notes")
 public class Note {
     @Id
-    private UUID id;
+    private String id;
 
     private String title;
     private String content;
     private String preview;
 
-    public Note(String title, String content) {
-        this.id = UUID.randomUUID();
-        this.title = title;
-        this.content = content;
-        this.preview = StringUtils.substring(content, 0, 100);
-    }
-
-    public Note(UUID id, String title, String content) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.preview = StringUtils.substring(content, 0, 100);
-    }
-
-    public Note(UUID id, String title, String content, String preview) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.preview = preview;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,5 +26,29 @@ public class Note {
 
     public String getPreview() {
         return preview;
+    }
+
+    public Note setId(String id) {
+        this.id = id;
+
+        return this;
+    }
+
+    public Note setTitle(String title) {
+        this.title = title;
+
+        return this;
+    }
+
+    public Note setContent(String content) {
+        this.content = content;
+
+        return this;
+    }
+
+    public Note setPreview(String preview) {
+        this.preview = preview;
+
+        return this;
     }
 }

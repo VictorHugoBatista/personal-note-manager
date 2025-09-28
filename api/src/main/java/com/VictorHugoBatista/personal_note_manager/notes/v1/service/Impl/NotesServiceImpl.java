@@ -17,8 +17,14 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public Note detail(UUID id) {
-        return repository.detail(id);
+    public Note detail(String id) {
+        var note = repository.findById(id);
+
+        if (note.isEmpty()) {
+            throw new RuntimeException("my not found");
+        }
+
+        return note.get();
     }
 
     @Override
@@ -32,7 +38,8 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public Note delete(UUID id) {
-        return new Note(id, "a", "b", "preview");
+    public Note delete(String id) {
+        return new Note()
+            .setId(id);
     }
 }

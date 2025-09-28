@@ -25,7 +25,10 @@ public class NoteUpdateDto {
         return content;
     }
 
-    public Note toNote(UUID id) {
-        return new Note(id, title, content);
+    public Note toNote(String id) {
+        return new Note()
+            .setId(id)
+            .setTitle(title)
+            .setContent(content);
     }
 }

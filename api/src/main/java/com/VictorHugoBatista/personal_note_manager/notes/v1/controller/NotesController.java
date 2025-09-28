@@ -40,7 +40,7 @@ public class NotesController {
     public Note detail(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
-        @PathVariable("id") UUID id
+        @PathVariable("id") String id
     ) {
         return this.service.detail(id);
     }
@@ -54,7 +54,7 @@ public class NotesController {
     public Note update(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
-        @PathVariable("id") UUID id,
+        @PathVariable("id") String id,
         @Valid @RequestBody NoteUpdateDto noteDto
     ) {
         return service.update(noteDto.toNote(id));
@@ -64,7 +64,7 @@ public class NotesController {
     public Note delete(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
-        @PathVariable("id") UUID id
+        @PathVariable("id") String id
     ) {
         return service.delete(id);
     }
