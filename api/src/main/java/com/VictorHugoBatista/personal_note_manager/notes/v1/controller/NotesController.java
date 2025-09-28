@@ -37,12 +37,12 @@ public class NotesController {
     }
 
     @GetMapping("/note/{id}")
-    public String detail(
+    public Note detail(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
         @PathVariable("id") UUID id
     ) {
-        return "detail";
+        return this.service.detail(id);
     }
 
     @PostMapping("/note")

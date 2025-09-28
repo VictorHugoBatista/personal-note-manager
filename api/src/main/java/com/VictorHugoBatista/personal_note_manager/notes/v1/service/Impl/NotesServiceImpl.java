@@ -10,6 +10,11 @@ import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService
 @Service
 public class NotesServiceImpl implements NotesService {
     @Override
+    public Note detail(UUID id) {
+        return new Note(id, "a", "b", "preview");
+    }
+
+    @Override
     public Note create(Note note) {
         return note;
     }
