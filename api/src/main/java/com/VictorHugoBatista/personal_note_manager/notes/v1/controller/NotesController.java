@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteCreateDto;
+import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteUpdateDto;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -50,20 +51,21 @@ public class NotesController {
     }
 
     @PutMapping("/note/{id}")
-    public String update(
+    public Note update(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
-        @PathVariable("id") UUID id
+        @PathVariable("id") UUID id,
+        @Valid @RequestBody NoteUpdateDto noteDto
     ) {
-        return "updated";
+        return service.update(noteDto.toNote(id));
     }
 
     @DeleteMapping("/note/{id}")
-    public String delete(
+    public Note delete(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
         @PathVariable("id") UUID id
     ) {
-        return "deleted";
+        return service.delete(id);
     }
 }
