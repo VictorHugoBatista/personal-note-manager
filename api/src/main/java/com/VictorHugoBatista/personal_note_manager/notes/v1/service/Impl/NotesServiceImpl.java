@@ -1,6 +1,6 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.service.Impl;
 
-import java.util.UUID;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,11 @@ public class NotesServiceImpl implements NotesService {
 
     public NotesServiceImpl(NoteRepository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public List<Note> list() {
+        return repository.findAll();
     }
 
     @Override

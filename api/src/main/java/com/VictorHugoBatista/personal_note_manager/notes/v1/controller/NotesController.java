@@ -1,6 +1,6 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.controller;
 
-import java.util.UUID;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +32,8 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public String list() {
-        return "list";
+    public List<Note> list() {
+        return service.list();
     }
 
     @GetMapping("/note/{id}")

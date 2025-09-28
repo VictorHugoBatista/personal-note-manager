@@ -1,7 +1,5 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos;
 
-import java.util.UUID;
-
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 
 import jakarta.validation.constraints.Size;
