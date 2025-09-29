@@ -1,7 +1,7 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,8 +38,8 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<CustomResponseEntity<List<Note>>> list() {
-        var response = service.list();
+    public ResponseEntity<CustomResponseEntity<Page<Note>>> list() {
+        var response = service.list(Pageable.unpaged());
 
         return http.buildResponse("Notes list fetched with success", response, HttpStatus.OK);
     }

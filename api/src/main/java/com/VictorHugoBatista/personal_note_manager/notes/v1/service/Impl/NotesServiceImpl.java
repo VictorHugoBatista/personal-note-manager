@@ -1,7 +1,7 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.service.Impl;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.VictorHugoBatista.personal_note_manager.notes.v1.exceptions.NoteNotFoundException;
@@ -18,8 +18,8 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public List<Note> list() {
-        return repository.findAll();
+    public Page<Note> list(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
