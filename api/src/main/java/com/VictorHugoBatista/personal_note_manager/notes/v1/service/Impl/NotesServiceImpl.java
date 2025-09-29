@@ -27,7 +27,7 @@ public class NotesServiceImpl implements NotesService {
         var note = repository.findById(id);
 
         if (note.isEmpty()) {
-            throw new NoteNotFoundException( String.format("Note id %s doesn't exists", id));
+            throw new NoteNotFoundException( String.format("Note id %s doesn't exist", id));
         }
 
         return note.get();

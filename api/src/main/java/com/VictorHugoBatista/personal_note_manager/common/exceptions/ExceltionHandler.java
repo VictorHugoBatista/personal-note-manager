@@ -25,9 +25,9 @@ public class ExceltionHandler {
 
     private ResponseError buildResponseError(Exception ex, HttpStatus status) {
         if (! Boolean.parseBoolean(returnStackTrace)) {
-            return new ResponseError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseError(ex.getMessage(), status);
         }
 
-        return new ResponseError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, ex.getStackTrace());
+        return new ResponseError(ex.getMessage(), status, ex.getStackTrace());
     }
 }
