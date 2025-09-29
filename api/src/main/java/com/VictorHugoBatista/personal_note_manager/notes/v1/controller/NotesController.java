@@ -1,5 +1,6 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.controller;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,8 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<CustomResponseEntity<Page<Note>>> list() {
-        var response = service.list(Pageable.unpaged());
+    public ResponseEntity<CustomResponseEntity<Page<Note>>> list(@ParameterObject Pageable pageable) {
+        var response = service.list(pageable);
 
         return http.buildResponse("Notes list fetched with success", response, HttpStatus.OK);
     }
