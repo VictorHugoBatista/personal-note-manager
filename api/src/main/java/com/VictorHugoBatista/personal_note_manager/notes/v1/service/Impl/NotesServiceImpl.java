@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.VictorHugoBatista.personal_note_manager.notes.v1.exceptions.NoteNotFoundException;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.repository.NoteRepository;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService;
@@ -26,7 +27,7 @@ public class NotesServiceImpl implements NotesService {
         var note = repository.findById(id);
 
         if (note.isEmpty()) {
-            throw new RuntimeException("my not found");
+            throw new NoteNotFoundException( String.format("Note id %s doesn't exists", id));
         }
 
         return note.get();
