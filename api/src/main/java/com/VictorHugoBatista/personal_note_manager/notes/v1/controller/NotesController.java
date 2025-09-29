@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
+import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteCreateDto;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteUpdateDto;
@@ -29,38 +30,40 @@ import jakarta.validation.Valid;
 @Tag(name = "notes", description = "Notes related endpoints")
 public class NotesController {
     private final NotesService service;
+    private final HttpHelpers http;
 
-    public NotesController(NotesService service) {
+    public NotesController(NotesService service, HttpHelpers http) {
         this.service = service;
+        this.http = http;
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<CustomResponseEntity<Object>> list() {
+    public ResponseEntity<CustomResponseEntity<List<Note>>> list() {
         var response = service.list();
 
-        return buildResponse("Notes list fetched with success", response, HttpStatus.OK);
+        return http.buildResponse("Notes list fetched with success", response, HttpStatus.OK);
     }
 
     @GetMapping("/note/{id}")
-    public ResponseEntity<CustomResponseEntity<Object>> detail(
+    public ResponseEntity<CustomResponseEntity<Note>> detail(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
         @PathVariable("id") String id
     ) {
         var response = this.service.detail(id);
 
-        return buildResponse("Note detail fetched with success", response, HttpStatus.OK);
+        return http.buildResponse("Note detail fetched with success", response, HttpStatus.OK);
     }
 
     @PostMapping("/note")
-    public ResponseEntity<CustomResponseEntity<Object>> create(@Valid @RequestBody NoteCreateDto noteDto) {
+    public ResponseEntity<CustomResponseEntity<Note>> create(@Valid @RequestBody NoteCreateDto noteDto) {
         var response = this.service.create(noteDto.toNote());
 
-        return buildResponse("Note created with success", response, HttpStatus.OK);
+        return http.buildResponse("Note created with success", response, HttpStatus.OK);
     }
 
     @PutMapping("/note/{id}")
-    public ResponseEntity<CustomResponseEntity<Object>> update(
+    public ResponseEntity<CustomResponseEntity<Note>> update(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
         @PathVariable("id") String id,
@@ -68,21 +71,17 @@ public class NotesController {
     ) {
         var response = service.update(noteDto.toNote(id));
 
-        return buildResponse("Note updated with success", response, HttpStatus.OK);
+        return http.buildResponse("Note updated with success", response, HttpStatus.OK);
     }
 
     @DeleteMapping("/note/{id}")
-    public ResponseEntity<CustomResponseEntity<Object>> delete(
+    public ResponseEntity<CustomResponseEntity<Note>> delete(
         @Parameter(in = ParameterIn.PATH,
         example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
         @PathVariable("id") String id
     ) {
         var response = service.delete(id);
 
-        return buildResponse("Note deleted with success", response, HttpStatus.OK);
-    }
-
-    private ResponseEntity<CustomResponseEntity<Object>> buildResponse(String message, Object data, HttpStatus status) {
-        return new ResponseEntity<>(new CustomResponseEntity<>(message, data), status);
+        return http.buildResponse("Note deleted with success", response, HttpStatus.OK);
     }
 }
