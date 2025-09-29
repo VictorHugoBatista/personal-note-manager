@@ -47,7 +47,7 @@ public class NotesController {
     @GetMapping("/note/{id}")
     public ResponseEntity<CustomResponseEntity<Note>> detail(
         @Parameter(in = ParameterIn.PATH,
-        example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
+        example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id
     ) {
         var response = this.service.detail(id);
@@ -65,7 +65,7 @@ public class NotesController {
     @PutMapping("/note/{id}")
     public ResponseEntity<CustomResponseEntity<Note>> update(
         @Parameter(in = ParameterIn.PATH,
-        example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
+        example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id,
         @Valid @RequestBody NoteUpdateDto noteDto
     ) {
@@ -77,7 +77,7 @@ public class NotesController {
     @DeleteMapping("/note/{id}")
     public ResponseEntity<CustomResponseEntity<Note>> delete(
         @Parameter(in = ParameterIn.PATH,
-        example = "08a0ce52-489e-4ddd-8742-f8ace4a004a0")
+        example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id
     ) {
         var response = service.delete(id);
