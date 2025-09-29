@@ -1,6 +1,8 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.exceptions;
 
-public class NoteNotFoundException extends RuntimeException {
+import com.VictorHugoBatista.personal_note_manager.common.exceptions.ResourceNotFoundException;
+
+public class NoteNotFoundException extends ResourceNotFoundException {
     public NoteNotFoundException(String message) {
         super(message);
     }
