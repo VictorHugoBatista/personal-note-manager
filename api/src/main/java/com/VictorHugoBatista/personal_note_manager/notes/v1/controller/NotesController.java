@@ -2,7 +2,9 @@ package com.VictorHugoBatista.personal_note_manager.notes.v1.controller;
 
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
@@ -39,8 +42,13 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<CustomResponseEntity<Page<Note>>> list(@ParameterObject Pageable pageable) {
-        var response = service.list(pageable);
+    public ResponseEntity<CustomResponseEntity<Page<Note>>> list(@RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "2") int sizePerPage,
+        @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
+        @RequestParam(defaultValue = "id") String sortField
+    ) {
+        Pageable pageable = PageRequest.of(page, sizePerPage, sortDirection, sortField);
+        Page<Note> response = service.list(pageable);
 
         return http.buildResponse("Notes list fetched with success", response, HttpStatus.OK);
     }
@@ -51,14 +59,14 @@ public class NotesController {
         example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id
     ) {
-        var response = this.service.detail(id);
+        Note response = this.service.detail(id);
 
         return http.buildResponse("Note detail fetched with success", response, HttpStatus.OK);
     }
 
     @PostMapping("/note")
     public ResponseEntity<CustomResponseEntity<Note>> create(@Valid @RequestBody NoteCreateDto noteDto) {
-        var response = this.service.create(noteDto.toNote());
+        Note response = this.service.create(noteDto.toNote());
 
         return http.buildResponse("Note created with success", response, HttpStatus.OK);
     }
@@ -70,7 +78,7 @@ public class NotesController {
         @PathVariable("id") String id,
         @Valid @RequestBody NoteUpdateDto noteDto
     ) {
-        var response = service.update(noteDto.toNote(id));
+        Note response = service.update(noteDto.toNote(id));
 
         return http.buildResponse("Note updated with success", response, HttpStatus.OK);
     }
@@ -81,7 +89,7 @@ public class NotesController {
         example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id
     ) {
-        var response = service.delete(id);
+        Note response = service.delete(id);
 
         return http.buildResponse("Note deleted with success", response, HttpStatus.OK);
     }
