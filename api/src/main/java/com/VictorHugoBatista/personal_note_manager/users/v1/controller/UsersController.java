@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
 import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserCreateDto;
+import com.VictorHugoBatista.personal_note_manager.users.v1.service.UsersService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -18,14 +20,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1")
 @Tag(name = "users", description = "Users related endpoints")
 public class UsersController {
+    private final UsersService service;
     private final HttpHelpers http;
 
-    public UsersController(HttpHelpers http) {
+    public UsersController(UsersService service, HttpHelpers http) {
+        this.service = service;
         this.http = http;
     }
 
     @PostMapping("/user")
     public ResponseEntity<CustomResponseEntity<String>> create(@Valid @RequestBody UserCreateDto userDto) {
+        User response = service.create(userDto.toUser());
         return http.buildResponse("User created with success",  "teste", HttpStatus.OK);
     }
 }
