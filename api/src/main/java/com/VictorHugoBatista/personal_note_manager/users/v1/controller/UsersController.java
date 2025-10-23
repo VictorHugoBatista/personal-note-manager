@@ -3,13 +3,16 @@ package com.VictorHugoBatista.personal_note_manager.users.v1.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
 import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserCreateDto;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -22,7 +25,7 @@ public class UsersController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<CustomResponseEntity<String>> create() {
+    public ResponseEntity<CustomResponseEntity<String>> create(@Valid @RequestBody UserCreateDto userDto) {
         return http.buildResponse("User created with success",  "teste", HttpStatus.OK);
     }
 }

@@ -1,0 +1,89 @@
+package com.VictorHugoBatista.personal_note_manager.users.v1.model;
+
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("users")
+public class User {
+    @Id
+    private int id;
+
+    private String email;
+    private String name;
+    private String password;
+    private String status;
+    private Date createdAt;
+    private Date updatedAt;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public User setId(int id) {
+        this.id = id;
+
+        return this;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+
+        return this;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+
+        return this;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
+
+        return this;
+    }
+
+    public User setStatus(String status) {
+        this.status = status;
+
+        return this;
+    }
+
+    public User setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+
+        return this;
+    }
+
+    public User setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+
+        return this;
+    }
+}
