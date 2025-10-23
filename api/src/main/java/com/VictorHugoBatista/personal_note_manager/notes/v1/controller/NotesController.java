@@ -1,6 +1,5 @@
 package com.VictorHugoBatista.personal_note_manager.notes.v1.controller;
 
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
