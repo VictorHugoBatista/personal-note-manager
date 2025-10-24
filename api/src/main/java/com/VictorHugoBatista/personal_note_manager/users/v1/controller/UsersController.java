@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
 import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
-import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserCreateDto;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 import com.VictorHugoBatista.personal_note_manager.users.v1.service.UsersService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,8 +29,8 @@ public class UsersController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<CustomResponseEntity<User>> create(@Valid @RequestBody UserCreateDto userDto) {
-        User response = service.create(userDto.toUser());
+    public ResponseEntity<CustomResponseEntity<UserDataOpen>> create(@Valid @RequestBody UserCreateDto userDto) {
+        var response = service.create(userDto.toUser());
 
         return http.buildResponse("User created with success",  response, HttpStatus.OK);
     }

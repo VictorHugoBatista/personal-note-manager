@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 import com.VictorHugoBatista.personal_note_manager.users.v1.repository.UserRepository;
 import com.VictorHugoBatista.personal_note_manager.users.v1.service.UsersService;
 
@@ -19,11 +20,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public User create(User user) {
+    public UserDataOpen create(User user) {
         user.initDates();
         user.initStatus();
         user.setPassword(encoder.encode(user.getPassword()));
 
-        return repository.save(user);
+        var createdUser = repository.save(user);
+
+        return createdUser.getOpenData();
     }
 }

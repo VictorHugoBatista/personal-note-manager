@@ -4,7 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 
 @Document("users")
 public class User {
@@ -90,5 +91,14 @@ public class User {
         this.updatedAt = updatedAt;
 
         return this;
+    }
+
+    public UserDataOpen getOpenData() {
+        return new UserDataOpen()
+            .setName(name)
+            .setEmail(email)
+            .setStatus(status)
+            .setCreatedAt(createdAt)
+            .setUpdatedAt(updatedAt);
     }
 }
