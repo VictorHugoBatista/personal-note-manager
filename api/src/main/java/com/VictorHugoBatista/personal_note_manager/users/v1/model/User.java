@@ -13,7 +13,7 @@ public class User {
     private String email;
     private String name;
     private String password;
-    private String status;
+    private UserStatus status;
     private Date createdAt;
     private Date updatedAt;
 
@@ -38,7 +38,7 @@ public class User {
         return password;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
@@ -68,7 +68,7 @@ public class User {
         return this;
     }
 
-    public User setStatus(String status) {
+    public User setStatus(UserStatus status) {
         this.status = status;
 
         return this;
@@ -88,11 +88,11 @@ public class User {
 
     private void initDates() {
         var now = new Date();
-        createdAt = now;
-        updatedAt = now;
+        setCreatedAt(now);
+        setUpdatedAt(now);
     }
 
     private void initStatus() {
-        status = "ACTIVE";
+        setStatus(UserStatus.ACTIVE);
     }
 }
