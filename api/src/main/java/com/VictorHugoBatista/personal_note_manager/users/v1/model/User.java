@@ -17,6 +17,11 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
 
+    public User() {
+        initDates();
+        initStatus();
+    }
+
     public int getId() {
         return id;
     }
@@ -85,5 +90,15 @@ public class User {
         this.updatedAt = updatedAt;
 
         return this;
+    }
+
+    private void initDates() {
+        var now = new Date();
+        createdAt = now;
+        updatedAt = now;
+    }
+
+    private void initStatus() {
+        status = "ACTIVE";
     }
 }

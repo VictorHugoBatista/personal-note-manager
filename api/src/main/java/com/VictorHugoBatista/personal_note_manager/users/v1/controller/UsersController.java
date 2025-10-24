@@ -29,8 +29,9 @@ public class UsersController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<CustomResponseEntity<String>> create(@Valid @RequestBody UserCreateDto userDto) {
+    public ResponseEntity<CustomResponseEntity<User>> create(@Valid @RequestBody UserCreateDto userDto) {
         User response = service.create(userDto.toUser());
-        return http.buildResponse("User created with success",  "teste", HttpStatus.OK);
+
+        return http.buildResponse("User created with success",  response, HttpStatus.OK);
     }
 }
