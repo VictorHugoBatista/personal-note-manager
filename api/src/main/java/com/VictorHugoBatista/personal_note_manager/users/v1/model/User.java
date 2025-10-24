@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Document("users")
 public class User {
@@ -17,9 +18,14 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
 
-    public User() {
-        initDates();
-        initStatus();
+    public void initDates() {
+        var now = new Date();
+        setCreatedAt(now);
+        setUpdatedAt(now);
+    }
+
+    public void initStatus() {
+        setStatus(UserStatus.ACTIVE);
     }
 
     public String getId() {
@@ -84,15 +90,5 @@ public class User {
         this.updatedAt = updatedAt;
 
         return this;
-    }
-
-    private void initDates() {
-        var now = new Date();
-        setCreatedAt(now);
-        setUpdatedAt(now);
-    }
-
-    private void initStatus() {
-        setStatus(UserStatus.ACTIVE);
     }
 }
