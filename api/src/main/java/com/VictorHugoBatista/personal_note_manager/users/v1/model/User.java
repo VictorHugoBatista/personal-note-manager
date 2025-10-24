@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("users")
 public class User {
     @Id
-    private int id;
+    private String id;
 
     private String email;
     private String name;
@@ -22,7 +22,7 @@ public class User {
         initStatus();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,12 +48,6 @@ public class User {
 
     public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public User setId(int id) {
-        this.id = id;
-
-        return this;
     }
 
     public User setEmail(String email) {
