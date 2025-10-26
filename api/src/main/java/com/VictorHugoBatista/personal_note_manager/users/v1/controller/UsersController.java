@@ -1,5 +1,7 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.controller;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +40,7 @@ public class UsersController {
     }
 
     @PostMapping("/user/login")
-    public ResponseEntity<CustomResponseEntity<Boolean>> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<CustomResponseEntity<Optional<String>>> login(@Valid @RequestBody UserLoginDto userLoginDto) {
         var response = service.login(userLoginDto.toDomain());
 
         return http.buildResponse("User logged with success",  response, HttpStatus.OK);

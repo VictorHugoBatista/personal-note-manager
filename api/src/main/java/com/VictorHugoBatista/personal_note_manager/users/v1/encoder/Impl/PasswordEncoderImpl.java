@@ -26,6 +26,6 @@ public class PasswordEncoderImpl implements PasswordEncoder {
     }
 
     private PasswordEncoderImpl() {
-        this.encoder = new BCryptPasswordEncoder();
+        encoder = new BCryptPasswordEncoder();
     }
 }

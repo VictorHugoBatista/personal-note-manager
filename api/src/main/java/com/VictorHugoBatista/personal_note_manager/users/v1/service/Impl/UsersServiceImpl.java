@@ -1,8 +1,12 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.service.Impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
+import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.JwtUtils;
+import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.Impl.JwtUtilsImpl;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.domain.UserLogin;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
@@ -28,15 +32,26 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Boolean login(UserLogin userLogin) {
+    public Optional<String> login(UserLogin userLogin) {
         var user = repository.findByEmail(userLogin.getEmail());
 
         if (user == null) {
-            return false;
+            return Optional.of("");
         }
 
         var encoder = PasswordEncoderImpl.getInstance();
+        var passwordMatch = encoder.matches(userLogin.getPassword(), user.getPassword());
 
-        return encoder.matches(userLogin.getPassword(), user.getPassword());
+        if (! passwordMatch) {
+            return Optional.of("");
+        }
+
+        try {
+            var jwtUrils = JwtUtilsImpl.getInstance();
+
+            return Optional.of(jwtUrils.create());
+        } catch (Exception ex) {
+            return Optional.of("");
+        }
     }
 }
