@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
+import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.PasswordEncoder;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 
 @Document("users")
@@ -27,6 +29,43 @@ public class User {
 
     public void initStatus() {
         setStatus(UserStatus.ACTIVE);
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+
+        return this;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+
+        return this;
+    }
+
+    public User setPassword(String password) {
+        PasswordEncoder encoder = PasswordEncoderImpl.getInstance();
+        this.password = encoder.encode(password);
+
+        return this;
+    }
+
+    public User setStatus(UserStatus status) {
+        this.status = status;
+
+        return this;
+    }
+
+    public User setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+
+        return this;
+    }
+
+    public User setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+
+        return this;
     }
 
     public String getId() {
@@ -55,42 +94,6 @@ public class User {
 
     public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public User setEmail(String email) {
-        this.email = email;
-
-        return this;
-    }
-
-    public User setName(String name) {
-        this.name = name;
-
-        return this;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-
-        return this;
-    }
-
-    public User setStatus(UserStatus status) {
-        this.status = status;
-
-        return this;
-    }
-
-    public User setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-
-        return this;
-    }
-
-    public User setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-
-        return this;
     }
 
     public UserDataOpen getOpenData() {

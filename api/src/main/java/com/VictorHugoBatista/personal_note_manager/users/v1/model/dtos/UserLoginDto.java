@@ -22,14 +22,6 @@ public class UserLoginDto {
         return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public UserLogin toDomain() {
         return new UserLogin()
             .setEmail(email)

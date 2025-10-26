@@ -1,5 +1,8 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.model.domain;
 
+import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.PasswordEncoder;
+import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
+
 public class UserLogin {
     private String email;
     private String password;
@@ -11,7 +14,8 @@ public class UserLogin {
     }
 
     public UserLogin setPassword(String password) {
-        this.password = password;
+        PasswordEncoder encoder = PasswordEncoderImpl.getInstance();
+        this.password = encoder.encode(password);
 
         return this;
     }
