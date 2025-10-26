@@ -1,11 +1,11 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.service.Impl;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
-import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.JwtUtils;
 import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.Impl.JwtUtilsImpl;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.domain.UserLogin;
@@ -34,24 +34,28 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Optional<String> login(UserLogin userLogin) {
         var user = repository.findByEmail(userLogin.getEmail());
+        var emptyToken = Optional.of("");
 
         if (user == null) {
-            return Optional.of("");
+            return emptyToken;
         }
 
         var encoder = PasswordEncoderImpl.getInstance();
         var passwordMatch = encoder.matches(userLogin.getPassword(), user.getPassword());
 
         if (! passwordMatch) {
-            return Optional.of("");
+            return emptyToken;
         }
 
         try {
-            var jwtUrils = JwtUtilsImpl.getInstance();
+            var jwtUtils = JwtUtilsImpl.getInstance();
 
-            return Optional.of(jwtUrils.create());
+            var jWtData = new HashMap<String, String>();
+            jWtData.put("email", userLogin.getEmail());
+
+            return Optional.of(jwtUtils.create(jWtData));
         } catch (Exception ex) {
-            return Optional.of("");
+            return emptyToken;
         }
     }
 }

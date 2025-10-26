@@ -4,6 +4,7 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Map;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.JwtUtils;
 import com.auth0.jwt.JWT;
@@ -23,9 +24,10 @@ public class JwtUtilsImpl implements JwtUtils {
         return instance;
     }
 
-    public String create() throws JWTCreationException {
+    public String create(Map<String, ?> data) throws JWTCreationException {
         return JWT.create()
             .withIssuer("auth0")
+            .withPayload(data)
             .sign(algorithm);
     }
 
