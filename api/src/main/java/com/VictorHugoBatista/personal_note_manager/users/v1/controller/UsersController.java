@@ -11,6 +11,7 @@ import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEnt
 import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserCreateDto;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserLoginDto;
 import com.VictorHugoBatista.personal_note_manager.users.v1.service.UsersService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,5 +34,11 @@ public class UsersController {
         var response = service.create(userDto.toUser());
 
         return http.buildResponse("User created with success",  response, HttpStatus.OK);
+    }
+
+    @PostMapping("/user/login")
+    public ResponseEntity<CustomResponseEntity<UserLoginDto>> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+
+        return http.buildResponse("User logged with success",  userLoginDto, HttpStatus.OK);
     }
 }
