@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
-import com.VictorHugoBatista.personal_note_manager.users.v1.jwt.Impl.JwtUtilsImpl;
+import com.VictorHugoBatista.personal_note_manager.packages.encoder.Impl.PasswordEncoderImpl;
+import com.VictorHugoBatista.personal_note_manager.packages.jwt.Impl.JwtUtilsImpl;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.domain.UserLogin;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;

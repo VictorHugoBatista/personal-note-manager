@@ -1,8 +1,8 @@
-package com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl;
+package com.VictorHugoBatista.personal_note_manager.packages.encoder.Impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.PasswordEncoder;
+import com.VictorHugoBatista.personal_note_manager.packages.encoder.PasswordEncoder;
 
 public class PasswordEncoderImpl implements PasswordEncoder {
     private static PasswordEncoder instance;
