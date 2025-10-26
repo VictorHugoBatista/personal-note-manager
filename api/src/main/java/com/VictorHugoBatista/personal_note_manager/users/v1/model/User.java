@@ -3,6 +3,7 @@ package com.VictorHugoBatista.personal_note_manager.users.v1.model;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
@@ -13,7 +14,9 @@ public class User {
     @Id
     private String id;
 
+    @Indexed(unique=true)
     private String email;
+
     private String name;
     private String password;
     private UserStatus status;

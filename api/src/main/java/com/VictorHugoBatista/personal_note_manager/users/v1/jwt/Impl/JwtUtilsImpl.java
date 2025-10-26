@@ -24,6 +24,7 @@ public class JwtUtilsImpl implements JwtUtils {
         return instance;
     }
 
+    @Override
     public String create(Map<String, ?> data) throws JWTCreationException {
         return JWT.create()
             .withIssuer("auth0")

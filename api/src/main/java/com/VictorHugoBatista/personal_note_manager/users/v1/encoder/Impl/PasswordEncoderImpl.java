@@ -17,10 +17,12 @@ public class PasswordEncoderImpl implements PasswordEncoder {
         return instance;
     }
 
+    @Override
     public String encode(String password) {
         return encoder.encode(password);
     }
 
+    @Override
     public boolean matches(String rawPassword, String encodedPassword) {
         return encoder.matches(rawPassword, encodedPassword);
     }
