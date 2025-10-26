@@ -21,6 +21,10 @@ public class PasswordEncoderImpl implements PasswordEncoder {
         return encoder.encode(password);
     }
 
+    public boolean matches(String rawPassword, String encodedPassword) {
+        return encoder.matches(rawPassword, encodedPassword);
+    }
+
     private PasswordEncoderImpl() {
         this.encoder = new BCryptPasswordEncoder();
     }

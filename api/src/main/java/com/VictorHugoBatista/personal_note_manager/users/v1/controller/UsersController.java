@@ -38,8 +38,9 @@ public class UsersController {
     }
 
     @PostMapping("/user/login")
-    public ResponseEntity<CustomResponseEntity<UserLogin>> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+    public ResponseEntity<CustomResponseEntity<Boolean>> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+        var response = service.login(userLoginDto.toDomain());
 
-        return http.buildResponse("User logged with success",  userLoginDto.toDomain(), HttpStatus.OK);
+        return http.buildResponse("User logged with success",  response, HttpStatus.OK);
     }
 }

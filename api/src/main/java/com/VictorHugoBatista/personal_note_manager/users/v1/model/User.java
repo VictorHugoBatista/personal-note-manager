@@ -6,7 +6,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.Impl.PasswordEncoderImpl;
-import com.VictorHugoBatista.personal_note_manager.users.v1.encoder.PasswordEncoder;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 
 @Document("users")
@@ -44,7 +43,7 @@ public class User {
     }
 
     public User setPassword(String password) {
-        PasswordEncoder encoder = PasswordEncoderImpl.getInstance();
+        var encoder = PasswordEncoderImpl.getInstance();
         this.password = encoder.encode(password);
 
         return this;
