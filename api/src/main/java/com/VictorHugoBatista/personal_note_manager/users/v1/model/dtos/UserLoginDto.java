@@ -1,5 +1,7 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos;
 
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.domain.UserLogin;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -25,7 +27,12 @@ public class UserLoginDto {
     }
 
     public void setPassword(String password) {
-        System.out.println("set password = " + password);
         this.password = password;
+    }
+
+    public UserLogin toDomain() {
+        return new UserLogin()
+            .setEmail(email)
+            .setPassword(password);
     }
 }
