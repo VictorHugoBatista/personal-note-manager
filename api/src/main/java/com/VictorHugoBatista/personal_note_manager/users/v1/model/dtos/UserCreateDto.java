@@ -2,10 +2,12 @@ package com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos;
 
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class UserCreateDto {
+    @Email()
     @NotEmpty(message = "The user email is required")
     @Size(min = 10, max = 50, message = "The email must be between 10 and 50 characters long")
     private String email;
