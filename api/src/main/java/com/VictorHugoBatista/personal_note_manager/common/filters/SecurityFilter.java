@@ -1,9 +1,11 @@
 package com.VictorHugoBatista.personal_note_manager.common.filters;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -32,7 +34,8 @@ public class SecurityFilter extends OncePerRequestFilter {
                 var jwtUtils = JwtUtilsImpl.getInstance();
                 var userId = jwtUtils.validate(token);
                 User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
-                var authentication = new UsernamePasswordAuthenticationToken(user, null);
+                var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                var authentication = new UsernamePasswordAuthenticationToken(user.getOpenData(), null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {
