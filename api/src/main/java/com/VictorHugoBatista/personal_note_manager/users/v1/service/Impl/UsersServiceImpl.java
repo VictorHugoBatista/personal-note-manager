@@ -51,7 +51,7 @@ public class UsersServiceImpl implements UsersService {
             var jwtUtils = JwtUtilsImpl.getInstance();
 
             var jWtData = new HashMap<String, String>();
-            jWtData.put("email", userLogin.getEmail());
+            jWtData.put("id", user.getId());
 
             return Optional.of(jwtUtils.create(jWtData));
         } catch (Exception ex) {
