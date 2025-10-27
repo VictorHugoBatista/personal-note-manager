@@ -13,6 +13,7 @@ import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataO
 @Service
 public class NotesServiceImpl implements NotesService {
     private final NoteRepository repository;
+    private UserDataOpen user;
 
     public NotesServiceImpl(NoteRepository repository) {
         this.repository = repository;
@@ -20,7 +21,7 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Page<Note> list(Pageable pageable) {
-        return repository.findAll(pageable);
+        return repository.findAll(this.user.getId(), pageable);
     }
 
     @Override
@@ -35,8 +36,8 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public Note create(Note note, UserDataOpen userLogged) {
-        note.setUserId(userLogged.getId());
+    public Note create(Note note) {
+        note.setUserId(user.getId());
 
         return repository.insert(note);
     }
@@ -56,5 +57,10 @@ public class NotesServiceImpl implements NotesService {
         var note = detail(id);
         repository.deleteById(id);
         return note;
+    }
+
+    @Override
+    public void setUser(UserDataOpen user) {
+        this.user = user;
     }
 }

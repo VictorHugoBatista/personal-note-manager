@@ -9,7 +9,8 @@ import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataO
 public interface NotesService {
     public Page<Note> list(Pageable pageable);
     public Note detail(String id);
-    public Note create(Note note, UserDataOpen userLogged);
+    public Note create(Note note);
     public Note update(Note note);
     public Note delete(String id);
+    public void setUser(UserDataOpen user);
 }

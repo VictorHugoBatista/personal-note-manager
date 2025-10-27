@@ -49,8 +49,11 @@ public class NotesController {
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "2") int sizePerPage,
         @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
-        @RequestParam(defaultValue = "id") String sortField
+        @RequestParam(defaultValue = "id") String sortField,
+        Authentication auth
     ) {
+        addUserToService(auth);
+
         Pageable pageable = PageRequest.of(page, sizePerPage, sortDirection, sortField);
         Page<Note> response = service.list(pageable);
 
@@ -61,8 +64,11 @@ public class NotesController {
     public ResponseEntity<CustomResponseEntity<Note>> detail(
         @Parameter(in = ParameterIn.PATH,
         example = "68d97abd86f4f62fb756e958")
-        @PathVariable("id") String id
+        @PathVariable("id") String id,
+        Authentication auth
     ) {
+        addUserToService(auth);
+
         Note response = this.service.detail(id);
 
         return http.buildResponse("Note detail fetched with success", response, HttpStatus.OK);
@@ -71,10 +77,11 @@ public class NotesController {
     @PostMapping("/note")
     public ResponseEntity<CustomResponseEntity<Note>> create(
         @Valid @RequestBody NoteCreateDto noteDto,
-        Authentication authentication
+        Authentication auth
     ) {
-        UserDataOpen userLogged = (UserDataOpen) authentication.getPrincipal();
-        Note response = this.service.create(noteDto.toNote(), userLogged);
+        addUserToService(auth);
+
+        Note response = this.service.create(noteDto.toNote());
 
         return http.buildResponse("Note created with success", response, HttpStatus.OK);
     }
@@ -84,8 +91,11 @@ public class NotesController {
         @Parameter(in = ParameterIn.PATH,
         example = "68d97abd86f4f62fb756e958")
         @PathVariable("id") String id,
-        @Valid @RequestBody NoteUpdateDto noteDto
+        @Valid @RequestBody NoteUpdateDto noteDto,
+        Authentication auth
     ) {
+        addUserToService(auth);
+
         Note response = service.update(noteDto.toNote(id));
 
         return http.buildResponse("Note updated with success", response, HttpStatus.OK);
@@ -95,10 +105,18 @@ public class NotesController {
     public ResponseEntity<CustomResponseEntity<Note>> delete(
         @Parameter(in = ParameterIn.PATH,
         example = "68d97abd86f4f62fb756e958")
-        @PathVariable("id") String id
+        @PathVariable("id") String id,
+        Authentication auth
     ) {
+        addUserToService(auth);
+
         Note response = service.delete(id);
 
         return http.buildResponse("Note deleted with success", response, HttpStatus.OK);
+    }
+
+    private void addUserToService(Authentication auth) {
+        var userLogged = (UserDataOpen) auth.getPrincipal();
+        this.service.setUser(userLogged);
     }
 }
