@@ -1,6 +1,5 @@
 package com.VictorHugoBatista.personal_note_manager.users.v1.service.Impl;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -50,10 +49,7 @@ public class UsersServiceImpl implements UsersService {
         try {
             var jwtUtils = JwtUtilsImpl.getInstance();
 
-            var jWtData = new HashMap<String, String>();
-            jWtData.put("id", user.getId());
-
-            return Optional.of(jwtUtils.create(jWtData));
+            return Optional.of(jwtUtils.create(user.getId()));
         } catch (Exception ex) {
             return emptyToken;
         }

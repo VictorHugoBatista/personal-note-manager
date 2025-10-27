@@ -1,15 +1,14 @@
 package com.VictorHugoBatista.personal_note_manager.common.filters;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.VictorHugoBatista.personal_note_manager.packages.jwt.Impl.JwtUtilsImpl;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.repository.UserRepository;
 
@@ -26,13 +25,18 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
-        var token = this.recoverToken(request);
+        try {
+            var token = this.recoverToken(request);
 
-        if (token != null) {
-            User user = userRepository.findById("68fe89839fab8c76cdc9ee61").orElseThrow(() -> new RuntimeException("User Not Found"));
-            var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (token != null) {
+                var jwtUtils = JwtUtilsImpl.getInstance();
+                var userId = jwtUtils.validate(token);
+                User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
+                var authentication = new UsernamePasswordAuthenticationToken(user, null);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
 
         filterChain.doFilter(request, response);

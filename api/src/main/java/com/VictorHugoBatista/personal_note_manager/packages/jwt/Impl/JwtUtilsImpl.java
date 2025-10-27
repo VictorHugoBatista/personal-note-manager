@@ -1,10 +1,6 @@
 package com.VictorHugoBatista.personal_note_manager.packages.jwt.Impl;
 
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.Map;
 
 import com.VictorHugoBatista.personal_note_manager.packages.jwt.JwtUtils;
 import com.auth0.jwt.JWT;
@@ -25,20 +21,23 @@ public class JwtUtilsImpl implements JwtUtils {
     }
 
     @Override
-    public String create(Map<String, ?> data) throws JWTCreationException {
+    public String create(String userId) throws JWTCreationException {
         return JWT.create()
             .withIssuer("auth0")
-            .withPayload(data)
+            .withSubject(userId)
             .sign(algorithm);
     }
 
-    private JwtUtilsImpl() throws NoSuchAlgorithmException {
-        var keyGenerator = KeyPairGenerator.getInstance("RSA");
-		keyGenerator.initialize(1024);
+    @Override
+    public String validate(String token) {
+        return JWT.require(algorithm)
+                .withIssuer("auth0")
+                .build()
+                .verify(token)
+                .getSubject();
+    }
 
-		var kp = keyGenerator.genKeyPair();
-		var publicKey = (RSAPublicKey) kp.getPublic();
-		var privateKey = (RSAPrivateKey) kp.getPrivate();
-        algorithm = Algorithm.RSA256(publicKey, privateKey);
+    private JwtUtilsImpl() throws NoSuchAlgorithmException {
+        algorithm = Algorithm.HMAC256("teste-teste");
     }
 }
