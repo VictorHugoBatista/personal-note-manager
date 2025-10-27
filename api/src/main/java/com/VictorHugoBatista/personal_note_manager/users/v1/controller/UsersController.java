@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.VictorHugoBatista.personal_note_manager.common.http.CustomResponseEntity;
 import com.VictorHugoBatista.personal_note_manager.common.http.HttpHelpers;
-import com.VictorHugoBatista.personal_note_manager.users.v1.model.domain.UserLogin;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserCreateDto;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserLoginDto;

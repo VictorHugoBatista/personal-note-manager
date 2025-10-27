@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.VictorHugoBatista.personal_note_manager.packages.jwt.Impl.JwtUtilsImpl;
-import com.VictorHugoBatista.personal_note_manager.users.v1.model.User;
 import com.VictorHugoBatista.personal_note_manager.users.v1.repository.UserRepository;
 
 import jakarta.servlet.FilterChain;
@@ -33,7 +32,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             if (token != null) {
                 var jwtUtils = JwtUtilsImpl.getInstance();
                 var userId = jwtUtils.validate(token);
-                User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
+                var user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not Found"));
                 var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
                 var authentication = new UsernamePasswordAuthenticationToken(user.getOpenData(), null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);

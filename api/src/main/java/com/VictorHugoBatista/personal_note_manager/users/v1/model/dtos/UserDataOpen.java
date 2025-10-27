@@ -5,11 +5,18 @@ import java.util.Date;
 import com.VictorHugoBatista.personal_note_manager.users.v1.model.UserStatus;
 
 public class UserDataOpen {
+    private String id;
     private String email;
     private String name;
     private UserStatus status;
     private Date createdAt;
     private Date updatedAt;
+
+    public UserDataOpen setId(String id) {
+        this.id = id;
+
+        return this;
+    }
 
     public UserDataOpen setEmail(String email) {
         this.email = email;
@@ -39,6 +46,10 @@ public class UserDataOpen {
         this.updatedAt = updatedAt;
 
         return this;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getEmail() {

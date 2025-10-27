@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteCreateDto;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.dtos.NoteUpdateDto;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -43,7 +45,8 @@ public class NotesController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<CustomResponseEntity<Page<Note>>> list(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<CustomResponseEntity<Page<Note>>> list(
+        @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "2") int sizePerPage,
         @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
         @RequestParam(defaultValue = "id") String sortField
@@ -66,8 +69,12 @@ public class NotesController {
     }
 
     @PostMapping("/note")
-    public ResponseEntity<CustomResponseEntity<Note>> create(@Valid @RequestBody NoteCreateDto noteDto) {
-        Note response = this.service.create(noteDto.toNote());
+    public ResponseEntity<CustomResponseEntity<Note>> create(
+        @Valid @RequestBody NoteCreateDto noteDto,
+        Authentication authentication
+    ) {
+        UserDataOpen userLogged = (UserDataOpen) authentication.getPrincipal();
+        Note response = this.service.create(noteDto.toNote(), userLogged);
 
         return http.buildResponse("Note created with success", response, HttpStatus.OK);
     }

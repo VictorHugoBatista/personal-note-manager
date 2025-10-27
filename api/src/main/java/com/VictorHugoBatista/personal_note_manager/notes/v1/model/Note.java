@@ -9,6 +9,7 @@ public class Note {
     @Id
     private String id;
 
+    private String userId;
     private String title;
     private String content;
     private String preview;
@@ -31,6 +32,12 @@ public class Note {
 
     public Note setId(String id) {
         this.id = id;
+
+        return this;
+    }
+
+    public Note setUserId(String userId) {
+        this.userId = userId;
 
         return this;
     }

@@ -8,6 +8,7 @@ import com.VictorHugoBatista.personal_note_manager.notes.v1.exceptions.NoteNotFo
 import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.repository.NoteRepository;
 import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService;
+import com.VictorHugoBatista.personal_note_manager.users.v1.model.dtos.UserDataOpen;
 
 @Service
 public class NotesServiceImpl implements NotesService {
@@ -34,7 +35,9 @@ public class NotesServiceImpl implements NotesService {
     }
 
     @Override
-    public Note create(Note note) {
+    public Note create(Note note, UserDataOpen userLogged) {
+        note.setUserId(userLogged.getId());
+
         return repository.insert(note);
     }
 

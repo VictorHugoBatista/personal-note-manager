@@ -100,6 +100,7 @@ public class User {
 
     public UserDataOpen getOpenData() {
         return new UserDataOpen()
+            .setId(id)
             .setName(name)
             .setEmail(email)
             .setStatus(status)
