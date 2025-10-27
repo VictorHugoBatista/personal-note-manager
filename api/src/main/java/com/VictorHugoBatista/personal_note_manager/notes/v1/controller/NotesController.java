@@ -25,12 +25,14 @@ import com.VictorHugoBatista.personal_note_manager.notes.v1.service.NotesService
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1")
 @Tag(name = "notes", description = "Notes related endpoints")
+@SecurityRequirement(name = "Authorization")
 public class NotesController {
     private final NotesService service;
     private final HttpHelpers http;
