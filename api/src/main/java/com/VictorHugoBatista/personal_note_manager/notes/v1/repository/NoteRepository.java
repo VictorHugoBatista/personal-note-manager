@@ -13,8 +13,8 @@ import com.VictorHugoBatista.personal_note_manager.notes.v1.model.Note;
 
 @Repository
 public interface NoteRepository extends MongoRepository<Note, String> {
-    @Query(value = "{'userId': ?1}", fields="{'content': 0}")
-    public Page<Note> findAll(Pageable pageable, String userId);
+    @Query(value = "{'userId': ?0}", fields="{'content': 0}")
+    public Page<Note> findAll(String userId, Pageable pageable);
 
     @Query(value = "{'id': ?0, 'userId': ?1}", fields="{'preview': 0}")
     public Optional<Note> findById(String id, String userId);

@@ -23,7 +23,7 @@ public class NotesServiceImpl implements NotesService {
     public Page<Note> list(Pageable pageable) {
         var userId = user.getId();
 
-        return repository.findAll(pageable, userId);
+        return repository.findAll(userId, pageable);
     }
 
     @Override
