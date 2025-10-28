@@ -21,12 +21,16 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Page<Note> list(Pageable pageable) {
-        return repository.findAll(this.user.getId(), pageable);
+        var userId = user.getId();
+
+        return repository.findAll(pageable, userId);
     }
 
     @Override
     public Note detail(String id) {
-        var note = repository.findById(id);
+        var userId = user.getId();
+
+        var note = repository.findById(id, userId);
 
         if (note.isEmpty()) {
             throw new NoteNotFoundException( String.format("Note id %s doesn't exist", id));
@@ -37,7 +41,9 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public Note create(Note note) {
-        note.setUserId(user.getId());
+        var userId = user.getId();
+
+        note.setUserId(userId);
 
         return repository.insert(note);
     }
