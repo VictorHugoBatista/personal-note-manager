@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import Panel from "../../layout/panel";
+import PageRoute from "../page-route";
+import Button from "../../components/forms/button";
 
 const HomeView = () => (
   <div className="-mx-3 h-full flex">
@@ -7,8 +8,12 @@ const HomeView = () => (
       <p className="text-xl font-bold">Create your own notes in markdown format!</p>
 
       <div>
-        <Link className="inline-block m-2 py-3 px-4 rounded-sm bg-blue-500 text-white text-xl shadow-md shadow-blue-300 transition duration-200 ease-in-out hover:bg-blue-200 hover:shadow-xl hover:scale-110" to={'/sign-in'}>Sign in</Link>
-        <Link className="inline-block m-2 py-3 px-4 rounded-sm bg-blue-500 text-white text-xl shadow-md shadow-blue-300 transition duration-200 ease-in-out hover:bg-blue-200 hover:shadow-xl hover:scale-110" to={'/sign-up'}>Sign up</Link>
+        <Button link={PageRoute.SIGN_IN}>
+          Sign in
+        </Button>
+        <Button link={PageRoute.SIGN_UP}>
+          Sign up
+        </Button>
       </div>
     </Panel>
   </div>
