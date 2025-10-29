@@ -10,10 +10,7 @@ import Register from './pages/register/page';
 
 import "./dist/styles.css";
 
-
-
-function App() {
-  return (
+const App = () => (
     <Page>
       <Routes>
         <Route index element={<Home />} />
@@ -26,7 +23,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Page>
-  );
-}
+);
 
 export default App;
