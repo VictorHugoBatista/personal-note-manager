@@ -8,10 +8,10 @@ interface Props {
 }
 
 const Page = ({ children }: Props) => (
-  <div className="flex flex-col bg-amber-50 h-full justify-between">
+  <div className="flex flex-col bg-green-300 h-full justify-between">
     <Header />
 
-    <div className="container mx-auto flex flex-1 flex-col">
+    <div className="container mx-auto flex flex-1 flex-col -px-3">
       {children}
     </div>
 
