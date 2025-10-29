@@ -7,11 +7,13 @@ import Register from './pages/register/page';
 
 import NotesList from './pages/notes-list/page';
 import NoteDetail from './pages/note-detail/page';
+import Header from './layout/header';
 
 function App() {
   return (
     <div className="App">
-      <h1>site</h1>
+      <Header />
+
       <Routes>
         <Route index element={<Home />} />
         <Route path="/register" element={<Register />} />
