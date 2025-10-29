@@ -1,6 +1,8 @@
+import SignInView from "./sign-in.view";
+
 const SignIn = () => (
   <>
-    login
+    <SignInView />
   </>
 );
 
