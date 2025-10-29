@@ -6,6 +6,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `tail`
+
+Build src/styles to dist directory, where react imports the styles.
+
+### `tail-watch`
+
+Do the same a above, but with file updates watching.
+
 ### `yarn start`
 
 Runs the app in the development mode.\
