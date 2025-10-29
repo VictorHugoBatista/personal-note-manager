@@ -1,7 +1,10 @@
+import Panel from "../../layout/panel";
+import HomeView from "./home.view";
+
 const Home = () => (
-  <>
-    <h2>home</h2>
-  </>
+  <Panel>
+    <HomeView />
+  </Panel>
 );
 
 export default Home;
