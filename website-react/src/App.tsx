@@ -9,6 +9,8 @@ import NotesList from './pages/notes-list/page';
 import NoteDetail from './pages/note-detail/page';
 import Header from './layout/header';
 
+import "./dist/styles.css";
+
 function App() {
   return (
     <div className="App">
