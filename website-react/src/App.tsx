@@ -13,19 +13,21 @@ import "./dist/styles.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-col bg-amber-50">
       <Header />
 
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+      <div className="container mx-auto">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/internal/notes" element={<NotesList />} />
-        <Route path="/internal/note/:noteId" element={<NoteDetail />} />
+          <Route path="/internal/notes" element={<NotesList />} />
+          <Route path="/internal/note/:noteId" element={<NoteDetail />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }
