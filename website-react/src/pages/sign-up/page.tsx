@@ -1,6 +1,8 @@
+import SignUpView from "./sign-up.view";
+
 const SignUp = () => (
   <>
-    register
+    <SignUpView />
   </>
 );
 
