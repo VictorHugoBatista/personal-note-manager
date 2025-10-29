@@ -1,15 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 
-import NotFound from './pages/not-found/page';
+import Header from './layout/header';
+import Footer from './layout/footer';
 import Home from './pages/home/page';
 import Login from './pages/login/page';
+import NoteDetail from './pages/note-detail/page';
+import NotesList from './pages/notes-list/page';
+import NotFound from './pages/not-found/page';
 import Register from './pages/register/page';
 
-import NotesList from './pages/notes-list/page';
-import NoteDetail from './pages/note-detail/page';
-import Header from './layout/header';
-
 import "./dist/styles.css";
+
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+
+      <Footer />
     </div>
   );
 }
